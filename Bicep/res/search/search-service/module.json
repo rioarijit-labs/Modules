@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../schema/module.schema.json",
+  "id": "bicep:res/search/search-service",
+  "tool": "bicep",
+  "name": "Azure AI Search",
+  "summary": "Managed search service for full-text, vector and hybrid retrieval, used as the retrieval layer of RAG applications.",
+  "useWhen": [
+    "You are building retrieval-augmented generation with Foundry or Azure OpenAI",
+    "You need full-text, vector or hybrid search over your own content"
+  ],
+  "avoidWhen": [
+    "You need simple key lookups or SQL-style queries (use a database)"
+  ],
+  "tags": ["ai", "search", "rag", "private-networking"],
+  "wraps": { "source": "br/public:avm/res/search/search-service", "version": "0.13.0" },
+  "pairsWith": ["bicep:res/cognitive-services/foundry", "bicep:res/storage/storage-account"],
+  "maturity": "preview"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../schema/module.schema.json",
+  "id": "bicep:res/cognitive-services/foundry",
+  "tool": "bicep",
+  "name": "Azure AI Foundry",
+  "summary": "Azure AI Foundry resource with model deployments (Azure OpenAI and other models), Foundry projects, Entra ID only auth and private networking.",
+  "useWhen": [
+    "You need Azure OpenAI or other Foundry model deployments",
+    "You need a Foundry resource with projects for agents and evaluations"
+  ],
+  "avoidWhen": [
+    "You need the full Foundry landing zone with Cosmos DB, AI Search and Storage dependencies for agent standard setup (use the AVM pattern avm/ptn/ai-ml/ai-foundry instead)"
+  ],
+  "tags": ["ai", "foundry", "openai", "private-networking"],
+  "wraps": { "source": "br/public:avm/res/cognitive-services/account", "version": "0.19.1" },
+  "pairsWith": ["bicep:res/network/virtual-network", "bicep:res/storage/storage-account"],
+  "maturity": "preview"
+}

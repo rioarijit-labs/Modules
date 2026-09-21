@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../schema/module.schema.json",
+  "id": "bicep:res/app/managed-environment",
+  "tool": "bicep",
+  "name": "Container Apps environment",
+  "summary": "Shared hosting boundary for Container Apps: networking, logging and scaling infrastructure that one or more container apps run in.",
+  "useWhen": [
+    "You deploy container apps and need the environment they run in",
+    "You need container apps inside your VNet, reachable only privately"
+  ],
+  "avoidWhen": [
+    "You need full Kubernetes control (use AKS)"
+  ],
+  "tags": ["compute", "containers", "private-networking"],
+  "wraps": { "source": "br/public:avm/res/app/managed-environment", "version": "0.16.0" },
+  "pairsWith": ["bicep:res/app/container-app", "bicep:res/network/virtual-network", "bicep:res/operational-insights/log-analytics-workspace"],
+  "maturity": "preview"
+}

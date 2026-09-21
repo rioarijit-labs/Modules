@@ -1,0 +1,29 @@
+name: Bicep validate
+
+on:
+  pull_request:
+    paths:
+      - "Bicep/**"
+      - ".github/workflows/bicep-validate.yml"
+  push:
+    branches: [main, development]
+    paths:
+      - "Bicep/**"
+      - ".github/workflows/bicep-validate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Bicep CLI
+        run: |
+          az bicep install
+          echo "$HOME/.azure/bin" >> "$GITHUB_PATH"
+
+      - name: Build, lint and check metadata
+        run: python3 Bicep/scripts/validate.py

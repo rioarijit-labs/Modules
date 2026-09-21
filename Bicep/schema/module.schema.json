@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Module metadata",
+  "description": "Hand-written metadata that sits next to a module's main.bicep. Tool-agnostic so the same shape can describe Terraform modules later.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "tool", "name", "summary", "useWhen", "avoidWhen", "tags", "wraps", "maturity"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "type": "string",
+      "pattern": "^(bicep|terraform):(res|ptn|utl)/[a-z0-9-]+/[a-z0-9-]+$",
+      "description": "Permanent ID: <tool>:<kind>/<provider-group>/<module>. Matches the folder path."
+    },
+    "tool": { "type": "string", "enum": ["bicep", "terraform"] },
+    "name": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 20, "description": "One or two sentences in the language a user would ask for it in." },
+    "useWhen": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "avoidWhen": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9-]+$" } },
+    "wraps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "version"],
+      "properties": {
+        "source": { "type": "string", "description": "Upstream module reference, e.g. br/public:avm/res/storage/storage-account." },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$", "description": "Exact pinned upstream version." }
+      }
+    },
+    "pairsWith": { "type": "array", "items": { "type": "string" }, "description": "IDs of modules commonly deployed together." },
+    "maturity": { "type": "string", "enum": ["preview", "stable", "deprecated"] }
+  }
+}
