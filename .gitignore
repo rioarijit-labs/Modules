@@ -1,0 +1,12 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+# Modules and tests are consumed, not applied, so their dependency lock files are not committed
+.terraform.lock.hcl
+
+# macOS
+.DS_Store

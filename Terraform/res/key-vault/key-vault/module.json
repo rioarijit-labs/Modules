@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../Bicep/schema/module.schema.json",
+  "id": "terraform:res/key-vault/key-vault",
+  "tool": "terraform",
+  "name": "Key Vault",
+  "summary": "Key Vault for secrets, keys and certificates with Azure RBAC, purge protection and private access only.",
+  "useWhen": [
+    "You need to store secrets, keys or certificates",
+    "You need customer-managed keys or Key Vault references for app settings"
+  ],
+  "avoidWhen": [
+    "You only need app configuration values that are not secret (use App Configuration)",
+    "You need a dedicated single-tenant HSM (use Managed HSM)"
+  ],
+  "tags": [
+    "security",
+    "secrets",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-keyvault-vault/azurerm",
+    "version": "0.11.0"
+  },
+  "pairsWith": [
+    "terraform:res/network/private-endpoint",
+    "terraform:res/app/container-app",
+    "terraform:res/web/app-service"
+  ],
+  "maturity": "preview"
+}

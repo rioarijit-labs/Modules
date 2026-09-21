@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../Bicep/schema/module.schema.json",
+  "id": "terraform:res/web/app-service-plan",
+  "tool": "terraform",
+  "name": "App Service plan",
+  "summary": "Compute plan (Linux or Windows) that hosts one or more App Service web apps or function apps.",
+  "useWhen": [
+    "You are deploying an App Service web app or a dedicated-plan function app",
+    "Several apps should share compute"
+  ],
+  "avoidWhen": [
+    "You want serverless per-execution billing (use a Consumption or Flex Consumption function app instead)"
+  ],
+  "tags": [
+    "compute",
+    "web",
+    "app-service"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-web-serverfarm/azurerm",
+    "version": "2.0.8"
+  },
+  "pairsWith": [
+    "terraform:res/web/app-service"
+  ],
+  "maturity": "preview"
+}

@@ -77,3 +77,22 @@ python3 scripts/validate.py
 ```
 
 Requires the [Bicep CLI](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install).
+
+## Automation
+
+| Workflow | When | What |
+|---|---|---|
+| `bicep-validate` | Pull requests and pushes touching `Bicep/` | Builds, lints and checks metadata for every module |
+| `secret-scan` | Pull requests, pushes and weekly | Scans the full history with gitleaks |
+| `bicep-release` | Pushing a `bicep/vX.Y.Z` tag | Validates, then publishes a GitHub release with a zip of `Bicep/` (pre-release while below 1.0) |
+| Dependabot | Weekly | Updates the SHA-pinned GitHub Actions |
+| Renovate | Continuous, needs the [Renovate GitHub app](https://github.com/apps/renovate) installed | Opens a pull request per AVM module bump, updating `main.bicep` and `module.json` together |
+
+Nothing in this repository deploys to Azure. [examples/deploy-workflow](examples/deploy-workflow) shows how a separate private repository does that.
+
+## Release
+
+```bash
+git tag bicep/v0.1.0
+git push origin bicep/v0.1.0
+```

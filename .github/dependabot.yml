@@ -1,0 +1,12 @@
+# Keeps the SHA-pinned GitHub Actions up to date.
+# AVM module versions are updated by Renovate (see renovate.json): Dependabot does not understand Bicep modules.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"

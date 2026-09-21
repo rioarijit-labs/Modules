@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../../Bicep/schema/module.schema.json",
+  "id": "terraform:res/network/private-endpoint",
+  "tool": "terraform",
+  "name": "Private endpoint",
+  "summary": "Private endpoint that gives a PaaS resource a private IP in your virtual network, with optional private DNS registration.",
+  "useWhen": [
+    "You need private connectivity to a PaaS resource that has no built-in private endpoint option in its own module",
+    "You want to add a private endpoint to an existing resource"
+  ],
+  "avoidWhen": [
+    "The resource module already has privateEndpointSubnetResourceId (storage account, Foundry, app service): use that instead"
+  ],
+  "tags": [
+    "networking",
+    "private-networking",
+    "dns"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-network-privateendpoint/azurerm",
+    "version": "0.2.0"
+  },
+  "pairsWith": [
+    "terraform:res/network/virtual-network"
+  ],
+  "maturity": "preview"
+}

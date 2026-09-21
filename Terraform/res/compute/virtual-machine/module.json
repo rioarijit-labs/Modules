@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../../Bicep/schema/module.schema.json",
+  "id": "terraform:res/compute/virtual-machine",
+  "tool": "terraform",
+  "name": "Virtual machine",
+  "summary": "Linux or Windows virtual machine with no public IP, Entra ID login, trusted launch, encryption at host, platform patching and optional data disks.",
+  "useWhen": [
+    "You need full control of the OS or must run software that cannot be containerized or run on PaaS",
+    "You migrate an existing server workload",
+    "You need a jump host, build agent or utility VM inside your VNet"
+  ],
+  "avoidWhen": [
+    "A PaaS service fits (App Service, Container Apps, Azure SQL) and you do not need OS access",
+    "You need many identical instances with autoscale (use a virtual machine scale set)"
+  ],
+  "tags": [
+    "compute",
+    "vm",
+    "linux",
+    "windows"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-compute-virtualmachine/azurerm",
+    "version": "0.21.0"
+  },
+  "pairsWith": [
+    "terraform:res/network/virtual-network",
+    "terraform:res/network/network-security-group",
+    "terraform:res/key-vault/key-vault",
+    "terraform:res/operational-insights/log-analytics-workspace"
+  ],
+  "maturity": "preview"
+}

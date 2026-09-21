@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../Bicep/schema/module.schema.json",
+  "id": "terraform:res/cognitive-services/foundry",
+  "tool": "terraform",
+  "name": "Azure AI Foundry",
+  "summary": "Azure AI Foundry resource with model deployments (Azure OpenAI and other models), Foundry projects, Entra ID only auth and private networking.",
+  "useWhen": [
+    "You need Azure OpenAI or other Foundry model deployments",
+    "You need a Foundry resource with projects for agents and evaluations"
+  ],
+  "avoidWhen": [
+    "You need the full Foundry landing zone with Cosmos DB, AI Search and Storage dependencies for agent standard setup (use an AVM pattern module for that landing zone instead)"
+  ],
+  "tags": [
+    "ai",
+    "foundry",
+    "openai",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-cognitiveservices-account/azurerm",
+    "version": "0.11.1"
+  },
+  "pairsWith": [
+    "terraform:res/network/virtual-network",
+    "terraform:res/storage/storage-account"
+  ],
+  "maturity": "preview"
+}

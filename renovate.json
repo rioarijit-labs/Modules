@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Bumps pinned AVM module versions. The version appears in the module source file and in module.json, and both are updated in the same pull request. GitHub Actions are handled by Dependabot.",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["custom.regex"],
+  "labels": ["avm-update"],
+  "automerge": false,
+  "platformAutomerge": false,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Bicep AVM module reference in main.bicep and in module.json",
+      "managerFilePatterns": ["/^Bicep/.+/main\\.bicep$/", "/^Bicep/.+/module\\.json$/"],
+      "matchStrings": [
+        "'br/public:(?<depName>avm/[^:']+):(?<currentValue>\\d+\\.\\d+\\.\\d+)'",
+        "\"source\": \"br/public:(?<depName>avm/[^\"]+)\",\\s*\"version\": \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "datasourceTemplate": "docker",
+      "packageNameTemplate": "mcr.microsoft.com/bicep/{{{depName}}}",
+      "versioningTemplate": "semver-coerced"
+    },
+    {
+      "customType": "regex",
+      "description": "Terraform AVM module reference in main.tf and in module.json",
+      "managerFilePatterns": ["/^Terraform/.+/main\\.tf$/", "/^Terraform/.+/module\\.json$/"],
+      "matchStrings": [
+        "source\\s*=\\s*\"(?<depName>Azure/avm-[^\"]+)\"\\s*version\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
+        "\"source\": \"(?<depName>Azure/avm-[^\"]+)\",\\s*\"version\": \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "datasourceTemplate": "terraform-module",
+      "versioningTemplate": "semver-coerced"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "AVM modules are pre-1.0: a minor bump can break parameters, so never merge automatically",
+      "matchManagers": ["custom.regex"],
+      "automerge": false,
+      "commitMessageTopic": "AVM module {{depName}}"
+    }
+  ]
+}
