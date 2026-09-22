@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/api-management/service",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "API Management",
+  "summary": "API gateway for publishing, securing, rate-limiting and observing APIs, with OpenAPI-imported APIs.",
+  "useWhen": [
+    "You need a managed API gateway in front of one or more backend APIs, with policies, throttling or subscription keys",
+    "You need a developer portal for API consumers"
+  ],
+  "avoidWhen": [
+    "A single backend needs no gateway features beyond what App Service or Container Apps already provide"
+  ],
+  "tags": ["integration", "api", "gateway"],
+  "wraps": { "source": "Azure/avm-res-apimanagement-service/azurerm", "version": "0.9.0" },
+  "pairsWith": ["azure:terraform:res/web/app-service", "azure:terraform:res/app/container-app", "azure:terraform:res/network/private-endpoint"],
+  "maturity": "preview"
+}

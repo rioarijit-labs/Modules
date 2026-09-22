@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/network/load-balancer",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Load balancer",
+  "summary": "Internal (private) load balancer distributing traffic across backend VM or VMSS instances, with health probes.",
+  "useWhen": [
+    "You need to distribute traffic across a fleet of VMs with health-based routing",
+    "You need a stable private IP in front of instances that scale in and out"
+  ],
+  "avoidWhen": [
+    "You need internet-facing load balancing with WAF (use Application Gateway or Front Door instead)",
+    "You're load-balancing container apps or App Service, which already have built-in load balancing"
+  ],
+  "tags": ["networking", "load-balancing"],
+  "wraps": { "source": "Azure/avm-res-network-loadbalancer/azurerm", "version": "0.5.0" },
+  "pairsWith": ["azure:terraform:res/network/virtual-network", "azure:terraform:res/compute/virtual-machine"],
+  "maturity": "preview"
+}

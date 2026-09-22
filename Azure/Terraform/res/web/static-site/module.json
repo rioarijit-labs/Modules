@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/web/static-site",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Static Web App",
+  "summary": "Static Web App for a frontend, SPA or documentation site, with a managed global CDN and an optional Standard-tier private endpoint.",
+  "useWhen": [
+    "You need to host a static frontend, single-page app or documentation site",
+    "You want a managed global CDN in front of static content"
+  ],
+  "avoidWhen": [
+    "You need a server-rendered app with a long-running backend process (use App Service or Container Apps)",
+    "The site must be fully private from day one on the Free tier (private endpoints need Standard)",
+    "You want the resource's native GitHub/DevOps CI/CD integration (the upstream Terraform module does not expose it; deploy separately instead, see the README)"
+  ],
+  "tags": ["web", "frontend", "static-site"],
+  "wraps": { "source": "Azure/avm-res-web-staticsite/azurerm", "version": "0.6.2" },
+  "pairsWith": ["azure:terraform:res/network/private-endpoint"],
+  "maturity": "preview"
+}

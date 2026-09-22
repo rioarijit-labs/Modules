@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/cache/redis",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Redis Cache",
+  "summary": "Azure Cache for Redis for a distributed cache, session store or pub/sub layer, Entra ID only and private by default.",
+  "useWhen": [
+    "You need a distributed cache to cut database load or speed up reads",
+    "You need shared session state across multiple app instances",
+    "You need Redis pub/sub"
+  ],
+  "avoidWhen": [
+    "An in-process cache is enough (no need for a shared distributed cache)"
+  ],
+  "tags": ["data", "cache", "redis", "private-networking"],
+  "wraps": { "source": "br/public:avm/res/cache/redis", "version": "0.18.0" },
+  "pairsWith": ["azure:bicep:res/network/private-endpoint", "azure:bicep:res/web/app-service", "azure:bicep:res/app/container-app"],
+  "maturity": "preview"
+}

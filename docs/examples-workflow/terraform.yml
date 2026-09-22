@@ -1,0 +1,88 @@
+# EXAMPLE ONLY. This file lives outside .github/workflows, so GitHub never runs it here.
+# Copy it into the .github/workflows folder of a separate, private "environments" repository.
+#
+# Unlike Bicep, Terraform can source a module straight from a Git subdirectory
+# (module "x" { source = "git::...?ref=azure-terraform/vX.Y.Z" }), so this workflow does not
+# check the modules repository out at all - the pinned ref lives in main.tf itself,
+# reviewable in that file's diff instead of in a workflow input.
+#
+# Assumed layout of that repository:
+#   main.tf              composes the modules, each pinned with ?ref=azure-terraform/vX.Y.Z
+#   terraform.tfvars      parameters for the environment
+#   backend.tf            a remote backend (e.g. azurerm), not shown here - local state
+#                          is fine for this example but wrong for anything real
+#
+# Setup in that repository:
+#   - Environments "sandbox" (plan) and "sandbox-deploy" (apply, with required reviewers)
+#   - Variables AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID
+#   - A federated credential on the Entra app registration for each environment (no client secret)
+#   - The app registration has Reader (plan) and Contributor (apply) on the sandbox resource group only
+name: Deploy example (Terraform plan, then apply)
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Apply after the plan. The apply job still waits for approval.
+        type: boolean
+        default: false
+
+# Nothing here needs write access to the repository
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    environment: sandbox
+    permissions:
+      contents: read
+      id-token: write # request the OIDC token used by azure/login
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: "1.14.3"
+
+      - name: Sign in to Azure with OIDC
+        uses: azure/login@053f7285eb20bf5469ef084617b0b24d3cec53fc # v3.1.0
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Terraform plan
+        run: terraform plan -var-file=terraform.tfvars
+
+  deploy:
+    needs: plan
+    if: ${{ inputs.deploy }}
+    runs-on: ubuntu-latest
+    environment: sandbox-deploy # configure required reviewers on this environment
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: "1.14.3"
+
+      - name: Sign in to Azure with OIDC
+        uses: azure/login@053f7285eb20bf5469ef084617b0b24d3cec53fc # v3.1.0
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve -var-file=terraform.tfvars

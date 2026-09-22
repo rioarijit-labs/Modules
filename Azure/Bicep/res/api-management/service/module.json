@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/api-management/service",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "API Management",
+  "summary": "API gateway for publishing, securing, rate-limiting and observing APIs, with OpenAPI-imported APIs.",
+  "useWhen": [
+    "You need a managed API gateway in front of one or more backend APIs, with policies, throttling or subscription keys",
+    "You need a developer portal for API consumers"
+  ],
+  "avoidWhen": [
+    "A single backend needs no gateway features beyond what App Service or Container Apps already provide"
+  ],
+  "tags": ["integration", "api", "gateway"],
+  "wraps": { "source": "br/public:avm/res/api-management/service", "version": "0.14.4" },
+  "pairsWith": ["azure:bicep:res/web/app-service", "azure:bicep:res/app/container-app", "azure:bicep:res/network/private-endpoint"],
+  "maturity": "preview"
+}

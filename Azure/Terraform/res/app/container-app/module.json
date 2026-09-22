@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/app/container-app",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Container app",
+  "summary": "Serverless container for an API, web app or background worker with autoscaling, managed identity image pull and Key Vault secrets.",
+  "useWhen": [
+    "You want to run a container without managing Kubernetes",
+    "You need scale to zero or event-driven scaling",
+    "You need a worker process with no HTTP endpoint"
+  ],
+  "avoidWhen": [
+    "You need full Kubernetes APIs, custom operators or daemon sets (use AKS)",
+    "You need a multi-container pod with a shared volume beyond sidecars"
+  ],
+  "tags": [
+    "compute",
+    "containers",
+    "serverless"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-app-containerapp/azurerm",
+    "version": "0.9.0"
+  },
+  "pairsWith": [
+    "azure:terraform:res/app/managed-environment",
+    "azure:terraform:res/container-registry/registry",
+    "azure:terraform:res/key-vault/key-vault"
+  ],
+  "maturity": "preview"
+}

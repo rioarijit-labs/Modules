@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/web/app-service",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "App Service",
+  "summary": "Secure-by-default web app or function app: HTTPS only, TLS 1.2, no FTP or basic auth, managed identity, VNet integration and private endpoint.",
+  "useWhen": [
+    "You need to host a web app or API on a managed PaaS runtime",
+    "You need an app that reaches private resources through VNet integration and managed identity"
+  ],
+  "avoidWhen": [
+    "You need containers orchestrated with scale to zero and Dapr (use Container Apps)",
+    "You need full control of the OS or runtime (use a VM or AKS)"
+  ],
+  "tags": [
+    "compute",
+    "web",
+    "app-service",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-web-site/azurerm",
+    "version": "0.23.0"
+  },
+  "pairsWith": [
+    "azure:terraform:res/web/app-service-plan",
+    "azure:terraform:res/network/virtual-network",
+    "azure:terraform:res/storage/storage-account"
+  ],
+  "maturity": "preview"
+}

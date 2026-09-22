@@ -3,12 +3,12 @@ name: Bicep validate
 on:
   pull_request:
     paths:
-      - "Bicep/**"
+      - "Azure/Bicep/**"
       - ".github/workflows/bicep-validate.yml"
   push:
     branches: [main, development]
     paths:
-      - "Bicep/**"
+      - "Azure/Bicep/**"
       - ".github/workflows/bicep-validate.yml"
 
 permissions:
@@ -28,4 +28,4 @@ jobs:
           echo "$HOME/.azure/bin" >> "$GITHUB_PATH"
 
       - name: Build, lint and check metadata
-        run: python3 Bicep/scripts/validate.py
+        run: python3 Azure/Bicep/scripts/validate.py

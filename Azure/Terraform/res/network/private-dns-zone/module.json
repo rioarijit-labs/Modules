@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/network/private-dns-zone",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Private DNS zone",
+  "summary": "Private DNS zone linked to virtual networks so private endpoint names resolve to private IPs.",
+  "useWhen": [
+    "You use private endpoints and need name resolution inside your networks",
+    "You need one shared privatelink zone for a hub and its spokes"
+  ],
+  "avoidWhen": [
+    "You already have central private DNS zones in a connectivity subscription: reference their resource IDs instead of creating duplicates"
+  ],
+  "tags": [
+    "networking",
+    "dns",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-network-privatednszone/azurerm",
+    "version": "0.5.0"
+  },
+  "pairsWith": [
+    "azure:terraform:res/network/virtual-network",
+    "azure:terraform:res/network/private-endpoint"
+  ],
+  "maturity": "preview"
+}

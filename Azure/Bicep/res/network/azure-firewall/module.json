@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/network/azure-firewall",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Azure Firewall",
+  "summary": "Managed, stateful network firewall for a hub virtual network, filtering and logging outbound and east-west traffic.",
+  "useWhen": [
+    "You're building a hub-and-spoke network and need centralized egress filtering",
+    "You need to force spoke traffic through inspection with a route table"
+  ],
+  "avoidWhen": [
+    "A single VNet with NSGs is enough (Azure Firewall adds real cost and complexity)",
+    "You're deploying into a Virtual WAN secure hub (that uses its own Firewall deployment flow, not this module)"
+  ],
+  "tags": ["networking", "security", "firewall"],
+  "wraps": { "source": "br/public:avm/res/network/azure-firewall", "version": "0.11.1" },
+  "pairsWith": ["azure:bicep:res/network/firewall-policy", "azure:bicep:res/network/route-table", "azure:bicep:res/network/virtual-network"],
+  "maturity": "preview"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/web/static-site",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Static Web App",
+  "summary": "Static Web App for a frontend, SPA or documentation site, with a managed global CDN, optional API functions and an optional Standard-tier private endpoint.",
+  "useWhen": [
+    "You need to host a static frontend, single-page app or documentation site",
+    "You want built-in staging environments per pull request"
+  ],
+  "avoidWhen": [
+    "You need a server-rendered app with a long-running backend process (use App Service or Container Apps)",
+    "The site must be fully private from day one on the Free tier (private endpoints need Standard)"
+  ],
+  "tags": ["web", "frontend", "static-site"],
+  "wraps": { "source": "br/public:avm/res/web/static-site", "version": "0.9.6" },
+  "pairsWith": ["azure:bicep:res/network/private-endpoint", "azure:bicep:res/key-vault/key-vault"],
+  "maturity": "preview"
+}

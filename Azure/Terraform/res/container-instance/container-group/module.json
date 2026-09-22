@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/container-instance/container-group",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Container instance",
+  "summary": "One or more containers scheduled directly on Azure Container Instances with no orchestrator, for a short-lived job or a single sidecar-paired process, placed inside a VNet subnet.",
+  "useWhen": [
+    "You need to run a container for a batch job, CI runner or one-off task with no orchestrator overhead",
+    "You need the fastest possible container start with no environment or plan to provision first"
+  ],
+  "avoidWhen": [
+    "You need autoscaling, HTTP ingress or scale to zero on demand (use Container Apps)",
+    "You need a long-running production service (Container Apps or AKS fit better)"
+  ],
+  "tags": ["compute", "containers"],
+  "wraps": { "source": "Azure/avm-res-containerinstance-containergroup/azurerm", "version": "0.2.0" },
+  "pairsWith": ["azure:terraform:res/network/virtual-network", "azure:terraform:res/container-registry/registry", "azure:terraform:res/managed-identity/user-assigned-identity"],
+  "maturity": "preview"
+}

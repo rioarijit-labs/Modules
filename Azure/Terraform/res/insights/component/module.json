@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/insights/component",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Application Insights",
+  "summary": "Workspace-based Application Insights component for application performance monitoring: request and dependency tracing, exceptions and live metrics.",
+  "useWhen": [
+    "You need APM (traces, dependency calls, exceptions, live metrics) for an app, not just infrastructure logs",
+    "You want distributed tracing across services"
+  ],
+  "avoidWhen": [
+    "You only need platform diagnostic logs and metrics (use diagnostics settings to the Log Analytics workspace directly, no Application Insights needed)"
+  ],
+  "tags": ["monitoring", "observability", "apm"],
+  "wraps": { "source": "Azure/avm-res-insights-component/azurerm", "version": "0.4.0" },
+  "pairsWith": ["azure:terraform:res/operational-insights/log-analytics-workspace", "azure:terraform:res/web/app-service", "azure:terraform:res/app/container-app"],
+  "maturity": "preview"
+}

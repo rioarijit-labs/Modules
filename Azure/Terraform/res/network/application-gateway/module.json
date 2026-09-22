@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/network/application-gateway",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Application Gateway",
+  "summary": "Layer 7 load balancer and reverse proxy with WAF, routing HTTP traffic by host name or path to one or more backends.",
+  "useWhen": [
+    "You need a regional internet-facing entry point with a WAF in front of App Service, VMs or an API",
+    "You need host- or path-based routing to different backends from one gateway"
+  ],
+  "avoidWhen": [
+    "You need HTTPS/TLS termination with certificate management (not covered by this module yet)",
+    "You need global (multi-region) routing and CDN caching (use Front Door instead, optionally in front of this gateway)"
+  ],
+  "tags": ["networking", "load-balancing", "waf", "ingress"],
+  "wraps": { "source": "Azure/avm-res-network-applicationgateway/azurerm", "version": "0.5.3" },
+  "pairsWith": ["azure:terraform:res/network/waf-policy", "azure:terraform:res/web/app-service"],
+  "maturity": "preview"
+}

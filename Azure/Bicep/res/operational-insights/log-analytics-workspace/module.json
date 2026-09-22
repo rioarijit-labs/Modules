@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/operational-insights/log-analytics-workspace",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Log Analytics workspace",
+  "summary": "Log Analytics workspace that collects diagnostic logs and metrics from other resources for querying and alerting.",
+  "useWhen": [
+    "You need a destination for diagnostic settings",
+    "You need central logs to query with KQL, alert on or feed Sentinel"
+  ],
+  "avoidWhen": [
+    "A central workspace already exists: pass its resource ID as diagnosticsWorkspaceResourceId instead of creating another"
+  ],
+  "tags": [
+    "monitoring",
+    "observability",
+    "foundation"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/operational-insights/workspace",
+    "version": "0.16.1"
+  },
+  "pairsWith": [],
+  "maturity": "preview"
+}

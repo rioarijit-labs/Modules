@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/container-registry/registry",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Container registry",
+  "summary": "Private registry for container images and OCI artifacts, with no admin user and Entra ID pull and push.",
+  "useWhen": [
+    "You run containers on Container Apps, AKS or App Service and need a private image source",
+    "You want a private registry reachable only through a private endpoint"
+  ],
+  "avoidWhen": [
+    "You only use public images"
+  ],
+  "tags": [
+    "containers",
+    "registry",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-containerregistry-registry/azurerm",
+    "version": "0.8.0"
+  },
+  "pairsWith": [
+    "azure:terraform:res/app/container-app",
+    "azure:terraform:res/network/private-dns-zone"
+  ],
+  "maturity": "preview"
+}

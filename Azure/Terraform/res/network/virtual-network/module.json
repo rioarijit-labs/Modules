@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/network/virtual-network",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Virtual network",
+  "summary": "Virtual network with typed subnets (NSG, delegation, service endpoints), peerings and diagnostics.",
+  "useWhen": [
+    "You need a network for VMs, private endpoints or App Service VNet integration",
+    "You are building a hub or spoke network"
+  ],
+  "avoidWhen": [
+    "You need a managed virtual WAN topology"
+  ],
+  "tags": [
+    "networking",
+    "foundation"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-network-virtualnetwork/azurerm",
+    "version": "0.22.2"
+  },
+  "pairsWith": [
+    "azure:terraform:res/network/network-security-group",
+    "azure:terraform:res/network/private-endpoint"
+  ],
+  "maturity": "preview"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/key-vault/key-vault",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Key Vault",
+  "summary": "Key Vault for secrets, keys and certificates with Azure RBAC, purge protection and private access only.",
+  "useWhen": [
+    "You need to store secrets, keys or certificates",
+    "You need customer-managed keys or Key Vault references for app settings"
+  ],
+  "avoidWhen": [
+    "You only need app configuration values that are not secret (use App Configuration)",
+    "You need a dedicated single-tenant HSM (use Managed HSM)"
+  ],
+  "tags": [
+    "security",
+    "secrets",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-keyvault-vault/azurerm",
+    "version": "0.11.0"
+  },
+  "pairsWith": [
+    "azure:terraform:res/network/private-endpoint",
+    "azure:terraform:res/app/container-app",
+    "azure:terraform:res/web/app-service"
+  ],
+  "maturity": "preview"
+}

@@ -3,12 +3,12 @@ name: Terraform validate
 on:
   pull_request:
     paths:
-      - "Terraform/**"
+      - "Azure/Terraform/**"
       - ".github/workflows/terraform-validate.yml"
   push:
     branches: [main, development]
     paths:
-      - "Terraform/**"
+      - "Azure/Terraform/**"
       - ".github/workflows/terraform-validate.yml"
 
 permissions:
@@ -28,4 +28,4 @@ jobs:
           terraform_wrapper: false
 
       - name: Format, validate and check metadata
-        run: python3 Terraform/scripts/validate.py
+        run: python3 Azure/Terraform/scripts/validate.py

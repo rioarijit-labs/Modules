@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/container-instance/container-group",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Container instance",
+  "summary": "One or more containers scheduled directly on Azure Container Instances with no orchestrator, for a short-lived job or a single sidecar-paired process, placed inside a VNet subnet.",
+  "useWhen": [
+    "You need to run a container for a batch job, CI runner or one-off task with no orchestrator overhead",
+    "You need the fastest possible container start with no environment or plan to provision first"
+  ],
+  "avoidWhen": [
+    "You need autoscaling, HTTP ingress or scale to zero on demand (use Container Apps)",
+    "You need a long-running production service (Container Apps or AKS fit better)"
+  ],
+  "tags": ["compute", "containers"],
+  "wraps": { "source": "br/public:avm/res/container-instance/container-group", "version": "0.7.1" },
+  "pairsWith": ["azure:bicep:res/network/virtual-network", "azure:bicep:res/container-registry/registry", "azure:bicep:res/managed-identity/user-assigned-identity"],
+  "maturity": "preview"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/cosmos-db/account",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Cosmos DB account",
+  "summary": "Cosmos DB account using the SQL (Core) API, with databases and containers, Entra ID only data-plane RBAC and private access only.",
+  "useWhen": [
+    "You need a globally distributed, low-latency NoSQL database",
+    "You need single-digit-millisecond reads and flexible schema, e.g. for a product catalog, user profiles or an agent's session store"
+  ],
+  "avoidWhen": [
+    "You need a relational database with joins and transactions across tables (use Azure SQL or SQL Managed Instance)",
+    "You need the MongoDB, Cassandra, Gremlin or Table API specifically (this module only wires the SQL/Core API databases and containers, though the underlying account resource supports the others)"
+  ],
+  "tags": ["data", "nosql", "cosmos-db", "private-networking"],
+  "wraps": { "source": "br/public:avm/res/document-db/database-account", "version": "0.21.1" },
+  "pairsWith": ["azure:bicep:res/network/private-endpoint", "azure:bicep:res/app/container-app", "azure:bicep:res/web/app-service"],
+  "maturity": "preview"
+}

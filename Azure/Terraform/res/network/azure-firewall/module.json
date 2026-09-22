@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/network/azure-firewall",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Azure Firewall",
+  "summary": "Managed, stateful network firewall for a hub virtual network, filtering and logging outbound and east-west traffic.",
+  "useWhen": [
+    "You're building a hub-and-spoke network and need centralized egress filtering",
+    "You need to force spoke traffic through inspection with a route table"
+  ],
+  "avoidWhen": [
+    "A single VNet with NSGs is enough (Azure Firewall adds real cost and complexity)"
+  ],
+  "tags": ["networking", "security", "firewall"],
+  "wraps": { "source": "Azure/avm-res-network-azurefirewall/azurerm", "version": "0.4.0" },
+  "pairsWith": ["azure:terraform:res/network/firewall-policy", "azure:terraform:res/network/route-table", "azure:terraform:res/network/virtual-network"],
+  "maturity": "preview"
+}

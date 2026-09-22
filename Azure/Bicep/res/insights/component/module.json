@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/insights/component",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Application Insights",
+  "summary": "Workspace-based Application Insights component for application performance monitoring: request and dependency tracing, exceptions and live metrics.",
+  "useWhen": [
+    "You need APM (traces, dependency calls, exceptions, live metrics) for an app, not just infrastructure logs",
+    "You want distributed tracing across services"
+  ],
+  "avoidWhen": [
+    "You only need platform diagnostic logs and metrics (use diagnostics settings to the Log Analytics workspace directly, no Application Insights needed)"
+  ],
+  "tags": ["monitoring", "observability", "apm"],
+  "wraps": { "source": "br/public:avm/res/insights/component", "version": "0.8.0" },
+  "pairsWith": ["azure:bicep:res/operational-insights/log-analytics-workspace", "azure:bicep:res/web/app-service", "azure:bicep:res/app/container-app"],
+  "maturity": "preview"
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/app/managed-environment",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Container Apps environment",
+  "summary": "Shared hosting boundary for Container Apps: networking, logging and scaling infrastructure that one or more container apps run in.",
+  "useWhen": [
+    "You deploy container apps and need the environment they run in",
+    "You need container apps inside your VNet, reachable only privately"
+  ],
+  "avoidWhen": [
+    "You need full Kubernetes control (use AKS)"
+  ],
+  "tags": [
+    "compute",
+    "containers",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "Azure/avm-res-app-managedenvironment/azurerm",
+    "version": "0.5.0"
+  },
+  "pairsWith": [
+    "azure:terraform:res/app/container-app",
+    "azure:terraform:res/network/virtual-network",
+    "azure:terraform:res/operational-insights/log-analytics-workspace"
+  ],
+  "maturity": "preview"
+}

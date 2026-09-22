@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/web/function-app",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Azure Functions",
+  "summary": "Function app with keyless (identity-based) storage access, on a Consumption or a Premium/Dedicated plan, HTTPS only and private by default.",
+  "useWhen": [
+    "You need event-driven or scheduled serverless compute (timers, queue triggers, HTTP APIs, Event Grid handlers)",
+    "You want to pay per execution rather than for reserved compute (Consumption plan)"
+  ],
+  "avoidWhen": [
+    "You need a long-running process with no natural trigger or timeout (use Container Apps or App Service)",
+    "You need Consumption-plan cold start eliminated and no VNet limits (use a Premium plan instead of Consumption, still this module, different serverFarmResourceId)"
+  ],
+  "tags": ["compute", "serverless", "functions"],
+  "wraps": { "source": "br/public:avm/res/web/site", "version": "0.24.0" },
+  "pairsWith": ["azure:bicep:res/web/app-service-plan", "azure:bicep:res/storage/storage-account", "azure:bicep:res/network/virtual-network"],
+  "maturity": "preview"
+}

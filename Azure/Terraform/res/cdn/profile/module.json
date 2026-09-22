@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/cdn/profile",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Front Door",
+  "summary": "Azure Front Door: global HTTPS entry point with a CDN cache, health-probed origin failover and managed TLS certificates for custom domains.",
+  "useWhen": [
+    "You need a global, low-latency entry point with caching in front of a web app or API",
+    "You need automatic failover between origins in different regions"
+  ],
+  "avoidWhen": [
+    "You need WAF protection today (not covered by this module; the Front Door-specific WAF policy resource is a different type from this repo's App Gateway waf-policy module)",
+    "Regional-only ingress is enough (Application Gateway is simpler and cheaper for a single-region deployment)"
+  ],
+  "tags": ["networking", "cdn", "ingress", "front-door"],
+  "wraps": { "source": "Azure/avm-res-cdn-profile/azurerm", "version": "0.1.9" },
+  "pairsWith": ["azure:terraform:res/web/app-service", "azure:terraform:res/network/application-gateway"],
+  "maturity": "preview"
+}

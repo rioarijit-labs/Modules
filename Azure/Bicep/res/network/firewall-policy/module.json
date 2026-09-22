@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/network/firewall-policy",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Azure Firewall policy",
+  "summary": "Network and application rule collections attached to an Azure Firewall, controlling what traffic it allows.",
+  "useWhen": [
+    "You're deploying Azure Firewall and need its rules",
+    "You want firewall rules reusable across multiple firewalls (hub and spoke with shared policy)"
+  ],
+  "avoidWhen": [
+    "You're not deploying Azure Firewall (this policy has nothing to attach to)"
+  ],
+  "tags": ["networking", "security", "firewall"],
+  "wraps": { "source": "br/public:avm/res/network/firewall-policy", "version": "0.3.6" },
+  "pairsWith": ["azure:bicep:res/network/azure-firewall"],
+  "maturity": "preview"
+}

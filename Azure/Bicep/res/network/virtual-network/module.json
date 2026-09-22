@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/network/virtual-network",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Virtual network",
+  "summary": "Virtual network with typed subnets (NSG, delegation, service endpoints), peerings and diagnostics.",
+  "useWhen": [
+    "You need a network for VMs, private endpoints or App Service VNet integration",
+    "You are building a hub or spoke network"
+  ],
+  "avoidWhen": [
+    "You need a managed virtual WAN topology"
+  ],
+  "tags": [
+    "networking",
+    "foundation"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/network/virtual-network",
+    "version": "0.10.2"
+  },
+  "pairsWith": [
+    "azure:bicep:res/network/network-security-group",
+    "azure:bicep:res/network/private-endpoint"
+  ],
+  "maturity": "preview"
+}

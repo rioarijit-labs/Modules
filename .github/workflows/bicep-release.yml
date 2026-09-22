@@ -1,10 +1,10 @@
 name: Bicep release
 
-# Push a tag like bicep/v0.1.0 to validate the modules and publish a GitHub release.
+# Push a tag like azure-bicep/v0.1.0 to validate the modules and publish a GitHub release.
 on:
   push:
     tags:
-      - "bicep/v*"
+      - "azure-bicep/v*"
 
 permissions:
   contents: read
@@ -23,7 +23,7 @@ jobs:
           echo "$HOME/.azure/bin" >> "$GITHUB_PATH"
 
       - name: Build, lint and check metadata
-        run: python3 Bicep/scripts/validate.py
+        run: python3 Azure/Bicep/scripts/validate.py
 
   release:
     needs: validate
@@ -40,18 +40,18 @@ jobs:
 
       - name: Publish release
         run: |
-          if ! [[ "$TAG" =~ ^bicep/v([0-9]+)\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Tag '$TAG' must look like bicep/v1.2.3" >&2
+          if ! [[ "$TAG" =~ ^azure-bicep/v([0-9]+)\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Tag '$TAG' must look like azure-bicep/v1.2.3" >&2
             exit 1
           fi
           major="${BASH_REMATCH[1]}"
-          version="${TAG#bicep/}"
-          archive="bicep-modules-${version}.zip"
+          version="${TAG#azure-bicep/}"
+          archive="azure-bicep-modules-${version}.zip"
 
-          git archive --format=zip --prefix="bicep-modules-${version}/" -o "$archive" HEAD Bicep
+          git archive --format=zip --prefix="azure-bicep-modules-${version}/" -o "$archive" HEAD Azure/Bicep
 
           flags=(--generate-notes --verify-tag)
           # Versions below 1.0 may still change incompatibly
           if [ "$major" = "0" ]; then flags+=(--prerelease); fi
 
-          gh release create "$TAG" "$archive" --repo "$GITHUB_REPOSITORY" --title "Bicep modules ${version}" "${flags[@]}"
+          gh release create "$TAG" "$archive" --repo "$GITHUB_REPOSITORY" --title "Azure Bicep modules ${version}" "${flags[@]}"

@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/container-service/managed-cluster",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "AKS",
+  "summary": "Azure Kubernetes Service cluster with a private API server, Entra ID RBAC only, workload identity federation and the Key Vault Secrets Provider on by default.",
+  "useWhen": [
+    "You need Kubernetes for full orchestration control, custom operators or an existing Helm/K8s-native toolchain",
+    "You're running many services that benefit from a shared cluster's autoscaling and scheduling"
+  ],
+  "avoidWhen": [
+    "Container Apps meets the need with far less operational overhead (no node management, no cluster upgrades)",
+    "You're running a single container or job (use Container Apps or Container Instances)"
+  ],
+  "tags": ["compute", "containers", "kubernetes", "private-networking"],
+  "wraps": { "source": "br/public:avm/res/container-service/managed-cluster", "version": "0.14.0" },
+  "pairsWith": ["azure:bicep:res/network/virtual-network", "azure:bicep:res/container-registry/registry", "azure:bicep:res/managed-identity/user-assigned-identity"],
+  "maturity": "preview"
+}

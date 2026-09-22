@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/storage/storage-account",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Storage account",
+  "summary": "Secure-by-default storage account for blobs, files, queues, tables and Data Lake, reachable only through private endpoints.",
+  "useWhen": [
+    "You need blob, file, queue, table or Data Lake Gen2 storage",
+    "You need a private, Entra ID only storage account with soft delete enabled"
+  ],
+  "avoidWhen": [
+    "You need an internet-facing static website without a private endpoint (set publicNetworkAccess to Enabled deliberately)",
+    "You need shared-key or SAS-only access (shared keys are disabled)"
+  ],
+  "tags": [
+    "storage",
+    "data",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/storage/storage-account",
+    "version": "0.33.1"
+  },
+  "pairsWith": [
+    "azure:bicep:res/network/virtual-network",
+    "azure:bicep:res/network/private-endpoint"
+  ],
+  "maturity": "preview"
+}

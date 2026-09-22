@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/network/virtual-wan-hub",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Virtual WAN hub",
+  "summary": "Microsoft-managed hub-and-spoke networking: a Virtual WAN and one regional hub, with spoke VNets connected to it, as an alternative to a hand-built hub VNet with peerings.",
+  "useWhen": [
+    "You need hub-and-spoke networking across many regions or many spokes, and want Microsoft to manage the hub's routing",
+    "You need branch/VPN/ExpressRoute connectivity into the hub at scale"
+  ],
+  "avoidWhen": [
+    "A single hand-built hub VNet (this repo's virtual-network module) with peerings is enough for a small number of spokes in one region"
+  ],
+  "tags": ["networking", "hub-spoke", "vwan"],
+  "wraps": { "source": "br/public:avm/res/network/virtual-hub", "version": "0.5.1" },
+  "pairsWith": ["azure:bicep:res/network/virtual-network", "azure:bicep:res/network/azure-firewall"],
+  "maturity": "preview"
+}

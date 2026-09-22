@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/cache/redis",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Redis Cache",
+  "summary": "Azure Cache for Redis for a distributed cache, session store or pub/sub layer, Entra ID only and private by default.",
+  "useWhen": [
+    "You need a distributed cache to cut database load or speed up reads",
+    "You need shared session state across multiple app instances",
+    "You need Redis pub/sub"
+  ],
+  "avoidWhen": [
+    "An in-process cache is enough (no need for a shared distributed cache)"
+  ],
+  "tags": ["data", "cache", "redis", "private-networking"],
+  "wraps": { "source": "Azure/avm-res-cache-redis/azurerm", "version": "0.4.0" },
+  "pairsWith": ["azure:terraform:res/network/private-endpoint", "azure:terraform:res/web/app-service", "azure:terraform:res/app/container-app"],
+  "maturity": "preview"
+}

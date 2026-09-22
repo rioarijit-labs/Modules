@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/network/waf-policy",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Web Application Firewall policy",
+  "summary": "WAF policy with the OWASP managed rule set and custom rules, attached to an Application Gateway or Front Door.",
+  "useWhen": [
+    "You need OWASP-based protection (SQLi, XSS, etc.) in front of a web app",
+    "You need custom WAF rules, e.g. blocking specific countries or IP ranges"
+  ],
+  "avoidWhen": [
+    "You're not fronting traffic with Application Gateway or Front Door (this policy has nothing to attach to)"
+  ],
+  "tags": ["networking", "security", "waf"],
+  "wraps": { "source": "br/public:avm/res/network/application-gateway-web-application-firewall-policy", "version": "0.3.0" },
+  "pairsWith": ["azure:bicep:res/network/application-gateway"],
+  "maturity": "preview"
+}

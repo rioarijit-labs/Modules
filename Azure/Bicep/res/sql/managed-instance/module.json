@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/sql/managed-instance",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "SQL Managed Instance",
+  "summary": "Near-100% SQL Server compatible managed database instance inside your VNet, for lifting and shifting SQL Server workloads that need instance-level features.",
+  "useWhen": [
+    "You migrate a SQL Server workload that uses SQL Agent, cross-database queries, CLR, linked servers or Service Broker",
+    "You need a database with a private IP inside your VNet and no public endpoint"
+  ],
+  "avoidWhen": [
+    "A single new cloud-native database is enough (Azure SQL Database is cheaper and deploys in minutes)",
+    "You need a quick lab deployment: the first instance in a subnet can take several hours and needs a dedicated, prepared subnet"
+  ],
+  "tags": [
+    "data",
+    "sql",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/sql/managed-instance",
+    "version": "0.5.0"
+  },
+  "pairsWith": [
+    "azure:bicep:res/network/virtual-network",
+    "azure:bicep:res/network/network-security-group"
+  ],
+  "maturity": "preview"
+}

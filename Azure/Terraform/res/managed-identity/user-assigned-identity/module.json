@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/managed-identity/user-assigned-identity",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "User-assigned managed identity",
+  "summary": "Standalone identity that can be attached to multiple resources or federated with an external OIDC issuer, avoiding a client secret for Kubernetes workload identity or GitHub Actions.",
+  "useWhen": [
+    "You need one identity shared across several resources, e.g. a pull identity attached to several container apps",
+    "You need federated (secretless) identity for AKS workload identity or a GitHub Actions OIDC login",
+    "You need an identity that must exist before the resource that will use it, e.g. a Container App's registry pull identity"
+  ],
+  "avoidWhen": [
+    "One resource with its own system-assigned identity is enough (simpler, and Azure deletes it with the resource)"
+  ],
+  "tags": ["identity", "security"],
+  "wraps": { "source": "Azure/avm-res-managedidentity-userassignedidentity/azurerm", "version": "0.5.2" },
+  "pairsWith": ["azure:terraform:res/app/container-app", "azure:terraform:res/compute/virtual-machine", "azure:terraform:res/container-registry/registry"],
+  "maturity": "preview"
+}

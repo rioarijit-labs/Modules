@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:terraform:res/network/route-table",
+  "cloud": "azure",
+  "tool": "terraform",
+  "name": "Route table",
+  "summary": "Route table with user-defined routes, associated with a subnet to force traffic through a firewall, NVA or gateway.",
+  "useWhen": [
+    "You need to force traffic from a subnet through Azure Firewall or a network virtual appliance",
+    "You need a default route (0.0.0.0/0) that overrides the implicit internet route"
+  ],
+  "avoidWhen": [
+    "Default system routing is sufficient (most subnets need no route table at all)"
+  ],
+  "tags": ["networking", "routing"],
+  "wraps": { "source": "Azure/avm-res-network-routetable/azurerm", "version": "0.5.0" },
+  "pairsWith": ["azure:terraform:res/network/virtual-network", "azure:terraform:res/network/azure-firewall"],
+  "maturity": "preview"
+}

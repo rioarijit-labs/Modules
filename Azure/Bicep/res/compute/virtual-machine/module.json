@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/compute/virtual-machine",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Virtual machine",
+  "summary": "Linux or Windows virtual machine with no public IP, Entra ID login, trusted launch, encryption at host, platform patching and optional data disks.",
+  "useWhen": [
+    "You need full control of the OS or must run software that cannot be containerized or run on PaaS",
+    "You migrate an existing server workload",
+    "You need a jump host, build agent or utility VM inside your VNet"
+  ],
+  "avoidWhen": [
+    "A PaaS service fits (App Service, Container Apps, Azure SQL) and you do not need OS access",
+    "You need many identical instances with autoscale (use a virtual machine scale set)"
+  ],
+  "tags": [
+    "compute",
+    "vm",
+    "linux",
+    "windows"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/compute/virtual-machine",
+    "version": "0.22.3"
+  },
+  "pairsWith": [
+    "azure:bicep:res/network/virtual-network",
+    "azure:bicep:res/network/network-security-group",
+    "azure:bicep:res/key-vault/key-vault",
+    "azure:bicep:res/operational-insights/log-analytics-workspace"
+  ],
+  "maturity": "preview"
+}

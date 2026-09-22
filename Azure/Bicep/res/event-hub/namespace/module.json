@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/event-hub/namespace",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Event Hubs namespace",
+  "summary": "High-throughput event streaming platform for telemetry, logs and data pipelines, with partitions, consumer groups and Kafka support.",
+  "useWhen": [
+    "You need to ingest millions of events per second from many producers",
+    "You need a Kafka-compatible endpoint or streaming input for Stream Analytics and Spark"
+  ],
+  "avoidWhen": [
+    "You need per-message settlement, sessions or dead-lettering (use Service Bus)",
+    "You need lightweight reactive event routing (use Event Grid)"
+  ],
+  "tags": [
+    "messaging",
+    "streaming",
+    "private-networking"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/event-hub/namespace",
+    "version": "0.15.1"
+  },
+  "pairsWith": [
+    "azure:bicep:res/network/private-dns-zone",
+    "azure:bicep:res/storage/storage-account"
+  ],
+  "maturity": "preview"
+}

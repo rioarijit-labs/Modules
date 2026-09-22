@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../../schema/module.schema.json",
+  "id": "azure:bicep:res/network/private-endpoint",
+  "cloud": "azure",
+  "tool": "bicep",
+  "name": "Private endpoint",
+  "summary": "Private endpoint that gives a PaaS resource a private IP in your virtual network, with optional private DNS registration.",
+  "useWhen": [
+    "You need private connectivity to a PaaS resource that has no built-in private endpoint option in its own module",
+    "You want to add a private endpoint to an existing resource"
+  ],
+  "avoidWhen": [
+    "The resource module already has privateEndpointSubnetResourceId (storage account, Foundry, app service): use that instead"
+  ],
+  "tags": [
+    "networking",
+    "private-networking",
+    "dns"
+  ],
+  "wraps": {
+    "source": "br/public:avm/res/network/private-endpoint",
+    "version": "0.12.1"
+  },
+  "pairsWith": [
+    "azure:bicep:res/network/virtual-network"
+  ],
+  "maturity": "preview"
+}
